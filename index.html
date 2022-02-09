@@ -52,22 +52,141 @@
                     <div class="flex-main">
                         <div id="filter-container" class="filter-container settings">
                             <div class="btn-check">Price</div>
-                            <div class="check-price">
-                                <div class="from">
+                            <div id="price">
+                                <div class="price">
                                     <p>from</p>
                                     <input type="text">
                                 </div>
-                                <div class="to">
+                                <div class="price">
                                     <p>to</p>
                                     <input type="text">
                                 </div>
                             </div>
-                            <div class="btn-check">Color</div>
-                            <div class="btn-check">Memory</div>
-                            <div class="btn-check">OS</div>
-                            <div class="btn-check">Display</div>
+
+
+                            <div id='ColorBtn' onclick="color()" class="btn-check">Color</div>
+                            <div id='Color' class="settings">
+                                <div class="check-btn">
+                                    <input type="checkbox" id="red" name="red">
+                                    <label>Red</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="green" name="green">
+                                    <label>Green</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="Black" name="Black">
+                                    <label>Black</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="White" name="White">
+                                    <label>White</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="Blue" name="Blue">
+                                    <label>Blue</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="Grey" name="Grey">
+                                    <label>Grey</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="Gold" name="Gold">
+                                    <label>Gold</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="Yellow" name="Yellow">
+                                    <label>Yellow</label>
+                                </div>
+                            </div>
+
+                            <div id='MemoryBtn' onclick="memory()" class="btn-check">Memory</div>
+
+                            <div id='Memory' class="settings">
+                                <div class="check-btn">
+                                    <input type="checkbox" id="32Gb" name="32Gb">
+                                    <label>32Gb</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="64Gb" name="64Gb">
+                                    <label>64Gb</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="128Gb" name="128Gb">
+                                    <label>128Gb</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="256Gb" name="256Gb">
+                                    <label>256Gb</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="512Gb" name="512Gb">
+                                    <label>512Gb</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="1Tb" name="1Tb">
+                                    <label>1Tb</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="2Tb" name="2Tb">
+                                    <label>2Tb</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="4Tb" name="4Tb">
+                                    <label>4Tb</label>
+                                </div>
+                            </div>
+
+                            <div id='OsBtn' onclick="Os()" class="btn-check">OS</div>
+                            <div id='Os' class="settings">
+                                <div class="check-btn">
+                                    <input type="checkbox" id="IOS" name="IOS">
+                                    <label>IOS</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="MacOS" name="MacOS">
+                                    <label>MacOS</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="tvOS" name="tvOS">
+                                    <label>tvOS</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="WatchOS" name="WatchOS">
+                                    <label>WatchOS</label>
+                                </div>
+                            </div>
+
+
+                            <div id='DisplayBtn' onclick="display()" class="btn-check">Display</div>
+
+                            <div id='Display' class="settings">
+                                <div class="check-btn">
+                                    <input type="checkbox" id="inch1" name="inch">
+                                    <label>2 - 5 inch</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="inch2" name="inch">
+                                    <label>5 - 7 inch</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="inch3" name="inch">
+                                    <label>7 - 12 inch</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="inch4" name="inch">
+                                    <label>12 - 16 inch</label>
+                                </div>
+                                <div class="check-btn">
+                                    <input type="checkbox" id="inch5" name="inch">
+                                    <label>+16 inch</label>
+                                </div>
+                            </div>
                         </div>
 
+
+
+                        <div id="info"></div>
                         <div id="cards-container" class="cards-container">
 
 

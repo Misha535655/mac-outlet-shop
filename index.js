@@ -1275,9 +1275,9 @@ let itemsContainer = document.getElementById("cards-container");
 let card = document.getElementById("card");
 itemsContainer.innerHTML = "";
 items.map(item => {
-
     let newElement = document.createElement("div");
     newElement.classList.add("product")
+    newElement.onclick = (event) => detalis(event, item)
 
 
     let tvimage = card.getElementsByClassName("card-image");
@@ -1295,9 +1295,66 @@ items.map(item => {
     reviews[0].innerHTML = `<strong>${item.orderInfo.reviews}%</strong> <br>Positive reviews <br>Above avarage`
     newElement.innerHTML = card.innerHTML;
     itemsContainer.appendChild(newElement);
-})
 
+})
 let settings = () => {
     let block = document.getElementById('filter-container');
     block.className.includes('settings') ? block.className = 'filter-container' : block.className = 'settings'
+}
+let color = () => {
+    let block = document.getElementById('Color')
+    block.className.includes('settings') ? block.className = 'check-container' : block.className = 'settings'
+}
+let memory = () => {
+    let block = document.getElementById('Memory')
+    block.className.includes('settings') ? block.className = 'check-container' : block.className = 'settings'
+}
+let Os = () => {
+    let block = document.getElementById('Os')
+    block.className.includes('settings') ? block.className = 'check-container' : block.className = 'settings'
+}
+let display = () => {
+    let block = document.getElementById('Display')
+    block.className.includes('settings') ? block.className = 'check-container' : block.className = 'settings'
+}
+
+function detalis(event, item) {
+
+    let cart = document.createElement('div');
+    cart.innerHTML = ` <div class="overlay"><div id="info" class="info-block">
+    <div class="image-info"><img class='card-image' src="${item.imgUrl}" alt=""></div>
+    <div class="title-info">
+        <h1 class="card-title">${item.name}</h1>
+        <div class="card-footer">
+            <p class="column-reviews">
+            ${item.orderInfo.reviews} %</b> Positive reviews
+                            <p>Above avarage</p>
+            </p>
+            <p class="column-orders"><strong>${Math.random()}</strong><br>orders</p>
+        </div>
+        <ul>
+            <li>Color: ${item.color}</li>
+            <li>Operating System: ${item.os}</li>
+            <li>Chip: ${item.chip.name}</li>
+            <li>Height: ${item.size.height}</li>
+            <li>Width: ${item.size.width}</li>
+            <li>Depth: ${item.size.depth}</li>
+            <li>Weight: ${item.size.weight}</li>
+        </ul>
+    </div>
+    <div class="price-info">
+        <h1>${item.orderInfo.inStock}$</h1>
+        <p>stock:23123</p>
+        <button type="button" class="active">Add to cart</button>
+    </div>
+    
+    </div></div>`
+    cart.addEventListener("click", hideOverlay)
+    cart.querySelector('.info-block').addEventListener("click", (e) => e.stopPropagation())
+    document.body.appendChild(cart);
+}
+
+function hideOverlay() {
+    const overlay = document.querySelector('.overlay');
+    overlay.remove();
 }

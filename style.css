@@ -295,14 +295,69 @@ html {
 }
 
 .btn-check {
-    margin: 10px;
-    padding-right: 30px;
+    padding: 10px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #DDDDDD;
+    border-top: 1px solid #DDDDDD;
+    box-sizing: border-box;
 }
 
-.from,
-.to {
+.price {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.price p {
+    padding-right: 10px;
+}
+
+.price input {
+    min-height: 35px;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.check-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.check-btn {
+    margin: 10px;
+}
+
+.info-block {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    width: 50%;
+    position: fixed;
+    z-index: 9999;
+    background-color: #fff;
+}
+
+.price-info :nth-child(n) {
+    margin: 20px 0;
+}
+
+.title-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.title-info ul li,
+.title-info ul {
+    margin: 10px;
+    list-style: none;
 }
 
 .settings {
