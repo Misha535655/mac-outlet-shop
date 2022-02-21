@@ -60,6 +60,76 @@ html {
     font-size: 14px;
 }
 
+.quantity {
+    padding-top: 20px;
+    margin-right: 60px;
+}
+
+.quantity input {
+    -webkit-appearance: none;
+    border: none;
+    text-align: center;
+    width: 32px;
+    font-size: 16px;
+    color: #43484D;
+    font-weight: 300;
+}
+
+button[class*=btn] {
+    width: 30px;
+    height: 30px;
+    background-color: #E1E8EE;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.minus-btn img {
+    margin-bottom: 3px;
+}
+
+.plus-btn img {
+    margin-top: 2px;
+}
+
+button:focus,
+input:focus {
+    outline: 0;
+}
+
+.basket-content {
+    display: flex;
+    padding-bottom: 20px;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+    max-height: 800px;
+    margin-right: 20px;
+    background: #FFFFFF;
+    border: 1px solid #DDDADA;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+}
+
+.basket-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.total {
+    margin: 0 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.basket-content .btn-basket {
+    margin: 0 auto;
+}
+
 .banner {
     background-image: url(img/banners/watch_banner.jpg);
     background-position: 50%;
@@ -83,7 +153,7 @@ html {
     padding-bottom: 39px;
 }
 
-.banner-btn {
+.banner-click {
     width: 150px;
     height: 50px;
     color: #ffffff;
@@ -93,6 +163,18 @@ html {
     margin: 0 auto;
     display: block;
     border-style: inherit;
+}
+
+.item-basket {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.img {
+    width: 100px;
+    height: 100px;
 }
 
 .text-element,
@@ -322,6 +404,30 @@ html {
     border-radius: 5px;
 }
 
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #E2E2E288;
+}
+
+.details-container {
+    background: white;
+    width: 70vw;
+    height: 500px;
+    opacity: 1;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .check-container {
     display: flex;
     flex-wrap: wrap;
@@ -329,19 +435,6 @@ html {
 
 .check-btn {
     margin: 10px;
-}
-
-.info-block {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    top: 50%;
-    right: 50%;
-    transform: translate(50%, -50%);
-    width: 50%;
-    position: fixed;
-    z-index: 9999;
-    background-color: #fff;
 }
 
 .price-info :nth-child(n) {

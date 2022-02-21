@@ -1271,32 +1271,160 @@ const items = [{
     },
 ];
 
+
+let filter = {
+    color: [],
+    storage: [],
+    os: [],
+    display: [],
+}
+let filterParmsHandler = {
+    color: (val) => ({ id: val }),
+    storage: (val) => ({ id: val }),
+    os: (val) => ({ id: val }),
+    display: (val) => ({ id: val, from: val.split("-")[0], to: val.split("-")[1] }),
+}
+
+// function filterInputUpdate(value, key, prop) {
+//     filter[key][prop] = value;
+
+// }
+
+function filterUpdate(el, key) {
+    let value = key.srcElement.defaultValue;
+    if (key.srcElement.checked) {
+        let index = filter[el].findIndex(filterValue => filterValue.id === el)
+        if (index === -1) {
+            filter[el].push(filterParmsHandler[el](value));
+            console.log(filter);
+        }
+    } else {
+        let index = filter[el].findIndex(filterValue => filterValue.id === el)
+        if (index === -1) {
+            filter[el].splice(index, 1);
+        }
+    }
+    filtration()
+}
+
+
+function filtration() {
+    render(items.filter(device => filteredData(device)));
+
+}
+
+function filteredData(device) {
+    let res = 0
+    for (let key in filter) {
+        switch (key) {
+            case 'storage':
+                if (filter[key].length > 0) {
+                    res = filter[key].findIndex(filterStorage => String(device.storage) === filterStorage.id);
+                }
+                break;
+            case 'os':
+                if (filter[key].length > 0) {
+                    res = filter[key].findIndex(filterOs => String(device[key]) === filterOs.id);
+                }
+                break;
+            case 'color':
+                if (filter[key].length > 0) {
+                    res = filter[key].findIndex(filterColor => device.color.includes(filterColor.id));
+                }
+                break;
+
+            case 'display':
+                if (filter[key].length > 0) {
+                    res = filter[key].findIndex(filterItem => device.display > filterItem.from && device.display < filterItem.to)
+                }
+                break
+        }
+
+        if (res === -1) {
+            break
+        }
+    }
+    return (res > -1);
+}
+
+
+
+
+
+
+
+
 let itemsContainer = document.getElementById("cards-container");
 let card = document.getElementById("card");
-itemsContainer.innerHTML = "";
-items.map(item => {
-    let newElement = document.createElement("div");
-    newElement.classList.add("product")
-    newElement.onclick = (event) => detalis(event, item)
+
+function render(item) {
+    itemsContainer.innerHTML = "";
+
+    item.map(item => {
+        let newElement = document.createElement("div");
+        // let btn = document.createElement('button');
+        newElement.classList.add("product")
+        newElement.onclick = (event) => detalis(event, item)
+
+        let tvimage = card.getElementsByClassName("card-image");
+        tvimage[0].src = item.imgUrl;
+
+        let header = card.getElementsByClassName("card-title");
+        header[0].textContent = item.name;
+
+        let count = card.getElementsByClassName("column-orders");
+        count[0].innerHTML = `<strong>${Math.floor(Math.random() * 10000)}</strong><br>orders`
+        let price = card.getElementsByClassName('text-animation');
+        price[0].innerHTML = `<strong>${item.orderInfo.inStock}</strong> left in stock <br>Price:
+        <strong>${item.price}</strong> $`
+        let reviews = card.getElementsByClassName('column-reviews');
+        reviews[0].innerHTML = `<strong>${item.orderInfo.reviews}%</strong> <br>Positive reviews <br>Above avarage`
+
+        newElement.innerHTML = card.innerHTML;
+
+        let btnAdd = newElement.querySelector('.active');
+
+        btnAdd.onclick = (e) => {
+            renderItemBasket(item);
+            e.stopPropagation()
+        }
 
 
-    let tvimage = card.getElementsByClassName("card-image");
-    tvimage[0].src = item.imgUrl;
+        itemsContainer.appendChild(newElement);
 
-    let header = card.getElementsByClassName("card-title");
-    header[0].textContent = item.name;
 
-    let count = card.getElementsByClassName("column-orders");
-    count[0].innerHTML = `<strong>${item.orderInfo.inStock}</strong><br>orders`
-    let price = card.getElementsByClassName('text-animation');
-    price[0].innerHTML = `<strong>${item.orderInfo.inStock}</strong> left in stock <br>Price:
-    <strong>${item.price}</strong> $`
-    let reviews = card.getElementsByClassName('column-reviews');
-    reviews[0].innerHTML = `<strong>${item.orderInfo.reviews}%</strong> <br>Positive reviews <br>Above avarage`
-    newElement.innerHTML = card.innerHTML;
-    itemsContainer.appendChild(newElement);
+    })
+}
+render(items)
 
-})
+function renderItemBasket(item) {
+    const cart = document.createElement('div')
+    cart.classList.add('item-basket')
+    const container = document.getElementById('render')
+    cart.innerHTML = `
+                    <div>
+                        <img class="img" src="${item.imgUrl}" alt="">
+                    </div>
+                    <div class="name-price">
+                        <p>${item.name}</p>
+                        <p>${item.price}</p>
+                    </div>
+                    <div class="quantity">
+                        <button class="plus-btn" type="button" name="button">
+                          <
+                        </button>
+                        <input type="text" name="name" value="1">
+                        <button class="minus-btn" type="button" name="button">
+                          >
+                        </button>
+                        <button class="minus-btn" type="button" name="button">
+                            X
+                          </button>
+                    </div>
+    `
+    container.appendChild(cart)
+}
+
 let settings = () => {
     let block = document.getElementById('filter-container');
     block.className.includes('settings') ? block.className = 'filter-container' : block.className = 'settings'
@@ -1319,9 +1447,13 @@ let display = () => {
 }
 
 function detalis(event, item) {
-
     let cart = document.createElement('div');
-    cart.innerHTML = ` <div class="overlay"><div id="info" class="info-block">
+    cart.addEventListener("click", () => {
+        const overlay = document.querySelector('.overlay');
+        overlay.remove();
+    })
+    cart.innerHTML = ` <div class="overlay">
+    <div id="info" class="details-container">
     <div class="image-info"><img class='card-image' src="${item.imgUrl}" alt=""></div>
     <div class="title-info">
         <h1 class="card-title">${item.name}</h1>
@@ -1330,7 +1462,7 @@ function detalis(event, item) {
             ${item.orderInfo.reviews} %</b> Positive reviews
                             <p>Above avarage</p>
             </p>
-            <p class="column-orders"><strong>${Math.random()}</strong><br>orders</p>
+            <p class="column-orders"><strong>${Math.floor(Math.random() * 10000)}</strong><br>orders</p>
         </div>
         <ul>
             <li>Color: ${item.color}</li>
@@ -1343,18 +1475,48 @@ function detalis(event, item) {
         </ul>
     </div>
     <div class="price-info">
-        <h1>${item.orderInfo.inStock}$</h1>
-        <p>stock:23123</p>
+        <h1>${item.price}$</h1>
+        <p>stock:${item.orderInfo.inStock}</p>
         <button type="button" class="active">Add to cart</button>
     </div>
-    
-    </div></div>`
-    cart.addEventListener("click", hideOverlay)
-    cart.querySelector('.info-block').addEventListener("click", (e) => e.stopPropagation())
+    </div>
+    </div>`
+
     document.body.appendChild(cart);
+    cart.querySelector('.details-container').addEventListener("click", (e) => e.stopPropagation())
+
 }
 
-function hideOverlay() {
-    const overlay = document.querySelector('.overlay');
-    overlay.remove();
+function addToCart(event, device) {
+    console.log('addToCart', device, event)
+    event.stopPropagation();
+    //  console.log(allDevice.find(item => item.id===deviceId))
+}
+
+function renderItemBasket(item) {
+    const cart = document.createElement('div')
+    cart.classList.add('item-basket')
+    const container = document.getElementById('render')
+    cart.innerHTML = `
+                    <div>
+                        <img class="img" src="${item.imgUrl}" alt="">
+                    </div>
+                    <div class="name-price">
+                        <p>${item.name}</p>
+                        <p>${item.price}$</p>
+                    </div>
+                    <div class="quantity">
+                        <button class="plus-btn" type="button" name="button">
+                          <
+                        </button>
+                        <input type="text" name="name" value="1">
+                        <button class="minus-btn" type="button" name="button">
+                          >
+                        </button>
+                        <button class="minus-btn" type="button" name="button">
+                            X
+                          </button>
+                    </div>
+    `
+    container.appendChild(cart)
 }

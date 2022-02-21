@@ -12,6 +12,28 @@
 </head>
 
 <body>
+    <div class="basket-container">
+        <div class="basket-content">
+            <div class="basket-name">
+                <h2>Shopping Cart</h2>
+                <p>Checkout is almost done!</p>
+            </div>
+            <div class="rendered-items" id="render">
+            </div>
+            <div class="total">
+                <p>Total amount:</p>
+                <p>Totlal price:</p>
+            </div>
+            <button class="banner-click">
+                Buy
+            </button>
+        </div>
+    </div>
+
+
+
+
+
     <div class="wrapper">
         <header class="header">
             <div class="container">
@@ -26,13 +48,15 @@
                     </a>
                 </div>
             </div>
+
+
         </header>
         <main class="main">
             <div class="container">
                 <section class="banner">
                     <div class="banner-content">
                         <p class="banner-text">Apple Watch</p>
-                        <button type="button" class="banner-btn">Add to cart</button>
+                        <button type="button" class="banner-click">Add to cart</button>
                     </div>
                 </section>
                 <section class="filter-section">
@@ -67,35 +91,35 @@
                             <div id='ColorBtn' onclick="color()" class="btn-check">Color</div>
                             <div id='Color' class="settings">
                                 <div class="check-btn">
-                                    <input type="checkbox" id="red" name="red">
+                                    <input type="checkbox" id="red" value="Red" onclick="filterUpdate('color', event)">
                                     <label>Red</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="green" name="green">
+                                    <input type="checkbox" id="green" value="Green" onclick="filterUpdate('color', event)">
                                     <label>Green</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="Black" name="Black">
+                                    <input type="checkbox" id="Black" value="Black" onclick="filterUpdate('color', event)">
                                     <label>Black</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="White" name="White">
+                                    <input type="checkbox" id="White" value="White" onclick="filterUpdate('color', event)">
                                     <label>White</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="Blue" name="Blue">
+                                    <input type="checkbox" id="Blue" value="Blue" onclick="filterUpdate('color', event)">
                                     <label>Blue</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="Grey" name="Grey">
+                                    <input type="checkbox" id="Grey" value="Silver" onclick="filterUpdate('color', event)">
                                     <label>Grey</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="Gold" name="Gold">
+                                    <input type="checkbox" id="Gold" value="Gold" onclick="filterUpdate('color', event)">
                                     <label>Gold</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="Yellow" name="Yellow">
+                                    <input type="checkbox" id="Yellow" value="Yellow" onclick="filterUpdate('color', event)">
                                     <label>Yellow</label>
                                 </div>
                             </div>
@@ -104,35 +128,35 @@
 
                             <div id='Memory' class="settings">
                                 <div class="check-btn">
-                                    <input type="checkbox" id="32Gb" name="32Gb">
+                                    <input type="checkbox" id="32Gb" value="32" onclick="filterUpdate('storage', event)">
                                     <label>32Gb</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="64Gb" name="64Gb">
+                                    <input type="checkbox" id="64Gb" value="64" onclick="filterUpdate('storage', event)">
                                     <label>64Gb</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="128Gb" name="128Gb">
+                                    <input type="checkbox" id="128Gb" value="128" onclick="filterUpdate('storage', event)">
                                     <label>128Gb</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="256Gb" name="256Gb">
+                                    <input type="checkbox" id="256Gb" value="256" onclick="filterUpdate('storage', event)">
                                     <label>256Gb</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="512Gb" name="512Gb">
+                                    <input type="checkbox" id="512Gb" value="512" onclick="filterUpdate('storage', event)">
                                     <label>512Gb</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="1Tb" name="1Tb">
+                                    <input type="checkbox" id="1Tb" value="1024" onclick="filterUpdate('storage', event)">
                                     <label>1Tb</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="2Tb" name="2Tb">
+                                    <input type="checkbox" id="2Tb" value="2048" onclick="filterUpdate('storage', event)">
                                     <label>2Tb</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="4Tb" name="4Tb">
+                                    <input type="checkbox" id="4Tb" value="4096" onclick="filterUpdate('storage', event)">
                                     <label>4Tb</label>
                                 </div>
                             </div>
@@ -140,19 +164,19 @@
                             <div id='OsBtn' onclick="Os()" class="btn-check">OS</div>
                             <div id='Os' class="settings">
                                 <div class="check-btn">
-                                    <input type="checkbox" id="IOS" name="IOS">
+                                    <input type="checkbox" value="IOS" name="IOS" onclick="filterUpdate('os', event)">
                                     <label>IOS</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="MacOS" name="MacOS">
+                                    <input type="checkbox" value="macOS" name="MacOS" onclick="filterUpdate('os', event)">
                                     <label>MacOS</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="tvOS" name="tvOS">
+                                    <input type="checkbox" value="tvOS" name="tvOS" onclick="filterUpdate('os', event)">
                                     <label>tvOS</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="WatchOS" name="WatchOS">
+                                    <input type="checkbox" value="WatchOS" name="WatchOS" onclick="filterUpdate('os', event)">
                                     <label>WatchOS</label>
                                 </div>
                             </div>
@@ -162,23 +186,23 @@
 
                             <div id='Display' class="settings">
                                 <div class="check-btn">
-                                    <input type="checkbox" id="inch1" name="inch">
+                                    <input type="checkbox" value="2-5" name="inch" onclick="filterUpdate('display', event)">
                                     <label>2 - 5 inch</label>
                                 </div>
-                                <div class="check-btn">
-                                    <input type="checkbox" id="inch2" name="inch">
+                                <div class=" check-btn ">
+                                    <input type="checkbox" value="5-7" name="inch" onclick="filterUpdate('display', event)">
                                     <label>5 - 7 inch</label>
                                 </div>
-                                <div class="check-btn">
-                                    <input type="checkbox" id="inch3" name="inch">
+                                <div class="check-btn ">
+                                    <input type="checkbox" value="7-12" name="inch" onclick="filterUpdate('display', event)">
                                     <label>7 - 12 inch</label>
                                 </div>
                                 <div class="check-btn">
-                                    <input type="checkbox" id="inch4" name="inch">
+                                    <input type="checkbox" value="12-16" name="inch" onclick="filterUpdate('display', event)">
                                     <label>12 - 16 inch</label>
                                 </div>
-                                <div class="check-btn">
-                                    <input type="checkbox" id="inch5" name="inch">
+                                <div class=" check-btn ">
+                                    <input type="checkbox" value="16-100" name="inch" onclick="filterUpdate('display', event)">
                                     <label>+16 inch</label>
                                 </div>
                             </div>
@@ -202,7 +226,7 @@
 
                                     <p class="text-animation">
                                     </p>
-                                    <button type="button" class="active">Add to cart</button>
+                                    <button class="active">Add to cart</button>
                                 </div>
                                 <div class="card-footer">
                                     <p class="column-reviews">
