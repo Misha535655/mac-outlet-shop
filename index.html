@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="basket-container">
+    <div class="basket-container settings" id="cart">
         <div class="basket-content">
             <div class="basket-name">
                 <h2>Shopping Cart</h2>
@@ -20,9 +20,9 @@
             </div>
             <div class="rendered-items" id="render">
             </div>
-            <div class="total">
-                <p>Total amount:</p>
-                <p>Totlal price:</p>
+            <div class="total" id="total">
+                <p>Total amount:0</p>
+                <p>Totlal price:0$</p>
             </div>
             <button class="banner-click">
                 Buy
@@ -41,11 +41,9 @@
                     <a class="header-logo-main" href="sometext">
                         <img src="img/items/">
                     </a>
-                    <a href="sometext">
-                        <div class="icon-block">
-                            <img src="img/icons/cart.svg">
-                        </div>
-                    </a>
+                    <div class="icon-block" onclick="cart()">
+                        <img src="img/icons/cart.svg">
+                    </div>
                 </div>
             </div>
 

@@ -97,6 +97,14 @@ input:focus {
     outline: 0;
 }
 
+.basket-container {
+    position: absolute;
+    width: 100%;
+    z-index: 9999;
+    top: 6%;
+    left: 50%;
+}
+
 .basket-content {
     display: flex;
     padding-bottom: 20px;

@@ -1361,6 +1361,7 @@ function render(item) {
     itemsContainer.innerHTML = "";
 
     item.map(item => {
+        item['count'] = 1
         let newElement = document.createElement("div");
         // let btn = document.createElement('button');
         newElement.classList.add("product")
@@ -1445,6 +1446,10 @@ let display = () => {
     let block = document.getElementById('Display')
     block.className.includes('settings') ? block.className = 'check-container' : block.className = 'settings'
 }
+let cart = () => {
+    let block = document.getElementById('cart')
+    block.className.includes('settings') ? block.className = 'basket-container' : block.className = 'settings'
+}
 
 function detalis(event, item) {
     let cart = document.createElement('div');
@@ -1487,15 +1492,10 @@ function detalis(event, item) {
 
 }
 
-function addToCart(event, device) {
-    console.log('addToCart', device, event)
-    event.stopPropagation();
-    //  console.log(allDevice.find(item => item.id===deviceId))
-}
-
 function renderItemBasket(item) {
     const cart = document.createElement('div')
     cart.classList.add('item-basket')
+    cart.id = item.id;
     const container = document.getElementById('render')
     cart.innerHTML = `
                     <div>
@@ -1503,20 +1503,49 @@ function renderItemBasket(item) {
                     </div>
                     <div class="name-price">
                         <p>${item.name}</p>
-                        <p>${item.price}$</p>
+                        <p class='totalPrice'>${item.price}$</p>
                     </div>
                     <div class="quantity">
-                        <button class="plus-btn" type="button" name="button">
+                        <button class="minus-btn" type="button" name="button" onclick='plusMinus(${item.count}, event)'>
                           <
                         </button>
-                        <input type="text" name="name" value="1">
-                        <button class="minus-btn" type="button" name="button">
+                        <input type="text" class='count' name="name" value="${item.count}">
+                        <button class="plus-btn" type="button" name="button" onclick='plusMinus(${item.count}, event)'>
                           >
                         </button>
-                        <button class="minus-btn" type="button" name="button">
+                        <button class="delete-btn" type="button" name="button" onclick='deleteItem(${item.id})'>
                             X
                           </button>
                     </div>
     `
     container.appendChild(cart)
+    total();
+}
+
+function total() {
+    let counter = 0
+    let allPrice = 0
+    const count = document.getElementsByClassName('count')
+    const totalPrice = document.getElementsByClassName('totalPrice')
+    console.log(totalPrice);
+    const total = document.getElementById('total')
+    for (i = 0; i <= count.length - 1; i++) {
+        counter += Number(count[i].defaultValue)
+        allPrice += Number(totalPrice[i].innerText.slice(0, -1))
+    }
+
+    total.innerHTML = `  
+                        <p>Total amount:${counter}</p>
+                        <p>Totlal price:${allPrice}$</p>`
+}
+
+function deleteItem(id) {
+    document.getElementById(String(id)).remove();
+    total();
+}
+
+function plusMinus(item, e) {
+    debugger
+    e.srcElement.className == 'plus-btn' ? item.count += 1 : item.count -= 1;
+    renderItemBasket(item);
 }
