@@ -1398,33 +1398,6 @@ function render(item) {
 }
 render(items)
 
-function renderItemBasket(item) {
-    const cart = document.createElement('div')
-    cart.classList.add('item-basket')
-    const container = document.getElementById('render')
-    cart.innerHTML = `
-                    <div>
-                        <img class="img" src="${item.imgUrl}" alt="">
-                    </div>
-                    <div class="name-price">
-                        <p>${item.name}</p>
-                        <p>${item.price}</p>
-                    </div>
-                    <div class="quantity">
-                        <button class="plus-btn" type="button" name="button">
-                          <
-                        </button>
-                        <input type="text" name="name" value="1">
-                        <button class="minus-btn" type="button" name="button">
-                          >
-                        </button>
-                        <button class="minus-btn" type="button" name="button">
-                            X
-                          </button>
-                    </div>
-    `
-    container.appendChild(cart)
-}
 
 let settings = () => {
     let block = document.getElementById('filter-container');
@@ -1506,11 +1479,11 @@ function renderItemBasket(item) {
                         <p class='totalPrice'>${item.price}$</p>
                     </div>
                     <div class="quantity">
-                        <button class="minus-btn" type="button" name="button" onclick='plusMinus(${item.count}, event)'>
+                        <button class="minus-btn" type="button" name="button" onclick='plusMinus(${item.id}, event)'>
                           <
                         </button>
                         <input type="text" class='count' name="name" value="${item.count}">
-                        <button class="plus-btn" type="button" name="button" onclick='plusMinus(${item.count}, event)'>
+                        <button class="plus-btn" type="button" name="button" onclick='plusMinus(${item.id}, event)'>
                           >
                         </button>
                         <button class="delete-btn" type="button" name="button" onclick='deleteItem(${item.id})'>
@@ -1544,8 +1517,19 @@ function deleteItem(id) {
     total();
 }
 
-function plusMinus(item, e) {
-    debugger
-    e.srcElement.className == 'plus-btn' ? item.count += 1 : item.count -= 1;
-    renderItemBasket(item);
+function plusMinus(id, e) {
+    items.map(item => {
+        if (item.id === id) {
+            if (e.srcElement.className == 'plus-btn') {
+                item.count += 1
+                item.price += item.price
+            } else {
+                item.count -= 1;
+                item.price -= item.price
+            }
+            document.getElementById(String(id)).remove()
+            renderItemBasket(item);
+        }
+    })
+
 }
